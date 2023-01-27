@@ -16,7 +16,7 @@ public class Knap01_Nr {
         this.cap = cap;
         this.size = size;
         this.cutPasteTable = new int[cap+1][size+1];
-        this.utilityTable = new int[cap+1][size+1][cap];
+        this.utilityTable = new int[cap+1][size+1][size];
     }
 
     int max(int a, int b)
@@ -26,7 +26,7 @@ public class Knap01_Nr {
 
     boolean check_valid(int utilCollection[],int location)
     {
-        return utilCollection[location] <= maxResources[location]        
+        return utilCollection[location] <= maxResources[location];
     }
 
     void copyUtil(int utilCollection[],int copyFrom[],int n)
@@ -63,7 +63,7 @@ public class Knap01_Nr {
 
                     if(check_valid(tempArr,j-1))
                     {
-                        cutPasteTable[i][j]= max(value[j-1]+ cutPasteTable[i- weight[j-1]][size],max(cutPasteTable[i][j-1],cutPasteTable[i-1][j]));
+                        cutPasteTable[i][j]= max(value[j-1]+ cutPasteTable[i- weight[j-1]][j],max(cutPasteTable[i][j-1],cutPasteTable[i-1][j]));
                         if(cutPasteTable[i][j] == cutPasteTable[i-1][j])
                         {
                             copyUtil(utilityTable[i][j],utilityTable[i-1][j],size);
